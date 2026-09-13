@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Excellent Barber — Clean Cut, Close Shave</title>
+<meta name="description" content="Excellent Barber — eight years of master-barber craft in Johannesburg. Every cut finished with a hot-towel close shave. Two branches: Sunward Park (Boksburg) & Woodmead (Sandton). Rated 4.9 on Google. Walk-ins welcome." />
+
+<!-- NOTE: replace all Unsplash image URLs with licensed / your own photography before launch -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Kaushan+Script&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   EXCELLENT BARBER — cinematic, dark, editorial
+   ============================================================ */
+:root {
+  --black: #0b0b0d;
+  --panel: #121216;
+  --cream: #f3efe7;
+  --ink: #14140f;
+  --white: #ffffff;
+  --red: #e01f26;
+  --red-2: #ff3b42;
+  --mut: rgba(255,255,255,.56);
+  --mut-d: rgba(20,20,15,.58);
+  --line: rgba(255,255,255,.14);
+  --line-d: rgba(20,20,15,.14);
+  --nav-h: 88px;
+  --disp: 'Anton', 'Arial Narrow', sans-serif;
+  --script: 'Kaushan Script', cursive;
+  --body: 'Inter', system-ui, sans-serif;
+  --exp: cubic-bezier(0.16, 1, 0.3, 1);
+  --smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: var(--body); font-weight: 400;
+  color: var(--white); background: var(--black);
+  line-height: 1.6; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+::selection { background: var(--red); color: #fff; }
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #000; }
+::-webkit-scrollbar-thumb { background: #2a2a2f; }
+::-webkit-scrollbar-thumb:hover { background: var(--red); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .kb { animation: none !important; }
+}
+
+/* ---------- shared type ---------- */
+.disp {
+  font-family: var(--disp); font-weight: 400;
+  text-transform: uppercase; line-height: 0.9;
+  letter-spacing: 0.005em; font-feature-settings: "liga" 0;
+}
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--red);
+}
+.eyebrow::before { content: '●'; font-size: 8px; }
+.mut { color: var(--mut); }
+
+/* ---------- buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 17px 34px; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  border-radius: 100px; border: 1px solid var(--white);
+  transition: background .5s var(--exp), color .5s var(--exp), border-color .5s var(--exp), transform .5s var(--exp);
+}
+.btn:hover { transform: translateY(-2px); }
+.btn--fill { background: var(--white); color: var(--black); border-color: var(--white); }
+.btn--fill:hover { background: var(--red); border-color: var(--red); color: #fff; }
+.btn--red { background: var(--red); border-color: var(--red); color: #fff; }
+.btn--red:hover { background: #fff; border-color:#fff; color: var(--black); }
+.btn--out { background: transparent; color: var(--white); }
+.btn--out:hover { background: var(--white); color: var(--black); }
+.btn--dark { border-color: var(--ink); color: var(--ink); }
+.btn--dark:hover { background: var(--ink); color: var(--cream); }
+.btn__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; transition: transform .5s var(--exp); }
+.btn:hover .btn__dot { transform: scale(1.8); }
+
+/* ---------- motion primitives ---------- */
+.rise { opacity: 0; transform: translateY(44px); transition: opacity 1s var(--exp), transform 1s var(--exp); }
+.rise.in { opacity: 1; transform: none; }
+.grp.in > .rise { opacity: 1; transform: none; }
+.grp > .rise:nth-child(1){transition-delay:.0s}
+.grp > .rise:nth-child(2){transition-delay:.08s}
+.grp > .rise:nth-child(3){transition-delay:.16s}
+.grp > .rise:nth-child(4){transition-delay:.24s}
+.grp > .rise:nth-child(5){transition-delay:.32s}
+.grp > .rise:nth-child(6){transition-delay:.40s}
+
+/* masked line reveal for big headlines */
+.ml { display: block; overflow: hidden; }
+.ml > span { display: block; transform: translateY(110%); transition: transform 1.15s var(--exp); }
+.in .ml > span, .load .ml > span { transform: translateY(0); }
+.ml:nth-child(2) > span { transition-delay: .09s; }
+.ml:nth-child(3) > span { transition-delay: .18s; }
+
+/* image cover reveal */
+.imgwrap { position: relative; overflow: hidden; }
+.imgwrap img { transition: transform 1.6s var(--exp); will-change: transform; }
+.imgwrap::after { content:''; position:absolute; inset:0; background: var(--black); transform-origin: right; transform: scaleX(1); transition: transform 1.2s var(--exp); }
+.imgwrap.in::after { transform: scaleX(0); }
+
+/* ============================================================ NAV */
+#nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 90; height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(20px,4vw,52px);
+  transition: background .5s var(--smooth), height .5s var(--smooth), border-color .5s;
+  border-bottom: 1px solid transparent;
+}
+#nav.scrolled { height: 68px; background: rgba(11,11,13,.82); backdrop-filter: blur(14px); border-bottom-color: var(--line); }
+.brand { display: flex; align-items: center; gap: 11px; }
+.brand svg { width: 24px; height: 24px; color: #fff; }
+.brand__name { font-family: var(--script); font-size: 25px; line-height: 1; padding-top: 6px; }
+.menu-btn {
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 12px 22px; border: 1px solid var(--line); border-radius: 100px;
+  font-size: 12px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+  background: rgba(255,255,255,.05); transition: background .4s var(--exp), border-color .4s;
+}
+.menu-btn:hover { background: rgba(255,255,255,.14); border-color: rgba(255,255,255,.4); }
+.menu-btn__ic { display: grid; grid-template-columns: 4px 4px; gap: 3px; }
+.menu-btn__ic i { width: 4px; height: 4px; background: currentColor; border-radius: 50%; transition: transform .4s var(--exp); }
+.menu-btn:hover .menu-btn__ic i { transform: scale(1.35); }
+
+/* fullscreen menu overlay */
+#overlay {
+  position: fixed; inset: 0; z-index: 100; background: var(--black);
+  clip-path: circle(0% at calc(100% - 90px) 44px);
+  transition: clip-path .8s var(--exp);
+  display: flex; flex-direction: column; pointer-events: none;
+}
+#overlay.open { clip-path: circle(150% at calc(100% - 90px) 44px); pointer-events: auto; }
+.ov-top { height: var(--nav-h); display: flex; align-items: center; justify-content: space-between; padding: 0 clamp(20px,4vw,52px); border-bottom: 1px solid var(--line); }
+.ov-close { display: inline-flex; align-items: center; gap: 12px; padding: 12px 22px; border: 1px solid var(--line); border-radius: 100px; font-size: 12px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; }
+.ov-close:hover { background: rgba(255,255,255,.1); }
+.ov-body { flex: 1; display: grid; grid-template-columns: 1.4fr 1fr; }
+.ov-links { padding: clamp(30px,5vw,70px); display: flex; flex-direction: column; justify-content: center; gap: 4px; }
+.ov-links a {
+  font-family: var(--disp); font-size: clamp(40px, 7vw, 88px); line-height: 1.02;
+  text-transform: uppercase; color: #fff; width: max-content; position: relative;
+  opacity: .55; transition: opacity .4s var(--exp), transform .4s var(--exp), color .4s;
+  transform: translateX(0);
+}
+.ov-links a:hover { opacity: 1; color: var(--red); transform: translateX(18px); }
+.ov-links a small { font-family: var(--body); font-size: 13px; vertical-align: super; letter-spacing: .1em; color: var(--red); margin-left: 8px; }
+.ov-side { border-left: 1px solid var(--line); padding: clamp(30px,5vw,70px); display: flex; flex-direction: column; justify-content: center; gap: 34px; }
+.ov-side h5 { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--red); margin-bottom: 12px; }
+.ov-side p { color: var(--mut); font-size: 15px; line-height: 1.65; }
+.ov-side a.inl { color: #fff; border-bottom: 1px solid var(--line); }
+.ov-side a.inl:hover { color: var(--red); }
+/* overlay link stagger */
+#overlay .ov-links a { opacity: 0; transform: translateY(30px); transition: opacity .6s var(--exp), transform .6s var(--exp); }
+#overlay.open .ov-links a { opacity: .55; transform: none; }
+#overlay.open .ov-links a:hover { opacity: 1; }
+#overlay.open .ov-links a:nth-child(1){transition-delay:.18s}
+#overlay.open .ov-links a:nth-child(2){transition-delay:.24s}
+#overlay.open .ov-links a:nth-child(3){transition-delay:.30s}
+#overlay.open .ov-links a:nth-child(4){transition-delay:.36s}
+#overlay.open .ov-links a:nth-child(5){transition-delay:.42s}
+#overlay.open .ov-links a:nth-child(6){transition-delay:.48s}
+
+/* ============================================================ HERO */
+.hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 0 clamp(20px,4vw,52px) clamp(34px,5vw,60px); overflow: hidden; }
+.hero__bg { position: absolute; inset: 0; z-index: 0; }
+.hero__bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero__bg .kb { animation: kb 22s ease-in-out infinite alternate; }
+@keyframes kb { from { transform: scale(1.02); } to { transform: scale(1.14); } }
+.hero__bg::after { content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(11,11,13,.55) 0%, rgba(11,11,13,.28) 42%, rgba(11,11,13,.86) 100%); }
+.hero__center { position: absolute; top: 46%; left: 50%; transform: translate(-50%,-50%); z-index: 2; text-align: center; width: 100%; padding: 0 20px; }
+.hero__eye { font-size: 12px; letter-spacing: .34em; text-transform: uppercase; color: rgba(255,255,255,.8); margin-bottom: 22px; }
+.hero__eye span { color: var(--red); }
+.hero h1 { font-family: var(--disp); text-transform: uppercase; font-size: clamp(58px, 12.5vw, 208px); line-height: 0.86; letter-spacing: .01em; }
+.hero h1 .red { color: var(--red); }
+.hero__foot { position: relative; z-index: 2; width: 100%; display: flex; justify-content: space-between; align-items: flex-end; gap: 30px; flex-wrap: wrap; }
+.hero__usp { display: flex; gap: 18px; max-width: 460px; }
+.hero__usp b { font-family: var(--disp); font-size: 26px; color: var(--red); line-height: 1; }
+.hero__usp p { color: rgba(255,255,255,.86); font-size: 16px; line-height: 1.55; }
+.hero__cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.hero__scroll { position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%); z-index: 2; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.6); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.hero__scroll i { width: 1px; height: 40px; background: rgba(255,255,255,.2); position: relative; overflow: hidden; }
+.hero__scroll i::after { content:''; position:absolute; inset:0; height:45%; background: var(--red); animation: dot 2s var(--exp) infinite; }
+@keyframes dot { 0%{transform:translateY(-110%)} 100%{transform:translateY(240%)} }
+
+/* ============================================================ MARQUEE */
+.mq { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; padding: 26px 0; background: var(--black); }
+.mq__t { display: flex; gap: 46px; width: max-content; animation: mq 34s linear infinite; }
+.mq span { font-family: var(--disp); font-size: clamp(26px,3vw,40px); text-transform: uppercase; display: inline-flex; align-items: center; gap: 46px; color: rgba(255,255,255,.32); }
+.mq span em { color: var(--red); font-style: normal; }
+.mq .star { color: var(--red); }
+@keyframes mq { to { transform: translateX(-50%); } }
+
+/* ============================================================ SECTION shell */
+.sec { padding: clamp(80px,11vw,160px) clamp(20px,4vw,52px); position: relative; }
+.wrap { max-width: 1280px; margin: 0 auto; }
+.sec-title { font-family: var(--disp); text-transform: uppercase; font-size: clamp(40px,6.5vw,104px); line-height: .92; }
+
+/* ============================================================ USP / WHY */
+.why { background: var(--black); }
+.why__head { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: end; margin-bottom: 68px; }
+.why__head p { color: var(--mut); font-size: 17px; max-width: 460px; }
+.why__grid { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid var(--line); }
+.why__col { padding: 40px 30px 40px 0; border-right: 1px solid var(--line); position: relative; }
+.why__col:last-child { border-right: none; padding-right: 0; }
+.why__no { font-family: var(--disp); font-size: 15px; color: var(--red); letter-spacing: .1em; }
+.why__col h3 { font-family: var(--disp); text-transform: uppercase; font-size: clamp(24px,2.2vw,30px); line-height: 1; margin: 26px 0 14px; }
+.why__col p { color: var(--mut); font-size: 15px; line-height: 1.6; }
+.why__bar { position: absolute; top: -1px; left: 0; height: 3px; width: 0; background: var(--red); transition: width .8s var(--exp); }
+.why__col:hover .why__bar { width: 100%; }
+
+/* ============================================================ STORY */
+.story { background: var(--cream); color: var(--ink); }
+.story__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(40px,6vw,90px); align-items: center; }
+.story .eyebrow { color: var(--red); }
+.story h2 { font-family: var(--disp); text-transform: uppercase; color: var(--ink); font-size: clamp(38px,5vw,78px); line-height: .92; margin: 22px 0 28px; }
+.story p { color: var(--mut-d); font-size: 17px; line-height: 1.75; margin-bottom: 18px; max-width: 520px; }
+.story__img { height: clamp(420px,60vw,640px); }
+.story__img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.15) contrast(1.03); }
+.story__stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; border-top: 1px solid var(--line-d); margin-top: 60px; padding-top: 40px; }
+.story__stat b { font-family: var(--disp); font-size: clamp(40px,4.4vw,62px); color: var(--ink); line-height: 1; display: block; }
+.story__stat b .u { color: var(--red); }
+.story__stat span { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--mut-d); margin-top: 8px; display: block; }
+
+/* ============================================================ SERVICES */
+.svc { background: var(--black); }
+.svc__head { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 24px; margin-bottom: 20px; }
+.svc__head p { color: var(--mut); max-width: 420px; font-size: 16px; }
+.svc__list { border-top: 1px solid var(--line); }
+.svc__row {
+  display: grid; grid-template-columns: 48px 1fr auto auto; align-items: center; gap: 24px;
+  padding: 30px 8px; border-bottom: 1px solid var(--line); position: relative; overflow: hidden;
+  transition: padding .5s var(--exp);
+}
+.svc__row::before { content:''; position:absolute; inset:0; background: var(--red); transform: translateY(101%); transition: transform .55s var(--exp); z-index:0; }
+.svc__row:hover::before { transform: translateY(0); }
+.svc__row > * { position: relative; z-index: 1; transition: color .45s var(--exp); }
+.svc__row:hover { padding-left: 24px; padding-right: 24px; }
+.svc__no { font-family: var(--disp); font-size: 14px; color: var(--red); }
+.svc__row:hover .svc__no { color: #fff; }
+.svc__name { font-family: var(--disp); text-transform: uppercase; font-size: clamp(24px,3vw,42px); line-height: 1; }
+.svc__time { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--mut); }
+.svc__row:hover .svc__time { color: rgba(255,255,255,.85); }
+.svc__price { font-family: var(--disp); font-size: clamp(22px,2.4vw,34px); }
+.svc__note { margin-top: 26px; color: var(--mut); font-size: 14px; }
+.svc__note b { color: var(--red); }
+
+/* ============================================================ GALLERY */
+.gal { background: var(--black); padding: clamp(70px,9vw,120px) 0; overflow: hidden; }
+.gal__head { padding: 0 clamp(20px,4vw,52px); margin-bottom: 48px; }
+.gal__track { display: flex; gap: 18px; width: max-content; animation: gscroll 48s linear infinite; padding: 0 9px; }
+.gal:hover .gal__track { animation-play-state: paused; }
+.gal__track figure { width: clamp(240px,26vw,360px); aspect-ratio: 4/5; overflow: hidden; flex: 0 0 auto; }
+.gal__track img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.25); transition: filter .6s var(--exp), transform 1.2s var(--exp); }
+.gal__track figure:hover img { filter: grayscale(0); transform: scale(1.06); }
+@keyframes gscroll { to { transform: translateX(-50%); } }
+
+/* ============================================================ REVIEWS */
+.rev { background: var(--cream); color: var(--ink); }
+.rev__head { text-align: center; margin-bottom: 60px; }
+.rev__head .eyebrow { color: var(--red); }
+.rev__stars { color: var(--red); letter-spacing: 4px; font-size: 20px; margin-top: 14px; }
+.rev__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+.rev__card { background: #fff; border: 1px solid var(--line-d); padding: 36px 32px; transition: transform .6s var(--exp), box-shadow .6s var(--exp); }
+.rev__card:hover { transform: translateY(-6px); box-shadow: 0 30px 60px rgba(0,0,0,.10); }
+.rev__q::before { content:'“'; font-family: var(--disp); color: var(--red); font-size: 60px; line-height: .5; display: block; margin-bottom: 14px; }
+.rev__q { font-size: 16px; line-height: 1.65; color: var(--ink); margin-bottom: 20px; }
+.rev__n { font-weight: 700; font-size: 15px; }
+.rev__r { font-size: 13px; color: var(--mut-d); }
+
+/* ============================================================ BRANCHES */
+.br { background: var(--black); }
+.br__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 56px; }
+.br__card { border: 1px solid var(--line); position: relative; overflow: hidden; transition: border-color .5s; }
+.br__card:hover { border-color: rgba(255,255,255,.35); }
+.br__img { height: 230px; }
+.br__img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.4) brightness(.7); transition: transform 1.4s var(--exp), filter .6s; }
+.br__card:hover .br__img img { transform: scale(1.06); filter: grayscale(.15) brightness(.8); }
+.br__body { padding: 34px clamp(24px,3vw,40px) 38px; }
+.br__tag { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--red); font-weight: 600; }
+.br__name { font-family: var(--disp); text-transform: uppercase; font-size: clamp(34px,4vw,52px); line-height: 1; margin: 10px 0 14px; }
+.br__addr { color: var(--mut); font-size: 16px; line-height: 1.55; }
+.br__meta { margin: 22px 0 26px; display: flex; flex-direction: column; gap: 12px; }
+.br__meta div { display: flex; gap: 12px; align-items: center; font-size: 15px; color: rgba(255,255,255,.85); }
+.br__meta svg { width: 17px; height: 17px; color: var(--red); flex: 0 0 auto; }
+.br__act { display: flex; gap: 12px; flex-wrap: wrap; }
+.br__act .btn { padding: 13px 24px; font-size: 11px; }
+
+/* ============================================================ CTA */
+.cta { background: var(--red); text-align: center; }
+.cta h2 { font-family: var(--disp); text-transform: uppercase; font-size: clamp(46px,8vw,132px); line-height: .88; color: #fff; }
+.cta p { color: rgba(255,255,255,.9); font-size: 18px; max-width: 520px; margin: 22px auto 30px; }
+.cta__phone { font-family: var(--disp); font-size: clamp(40px,7vw,92px); color: #fff; display: inline-block; transition: color .5s var(--exp), transform .5s var(--exp); }
+.cta__phone:hover { color: var(--black); transform: scale(1.02); }
+
+/* ============================================================ FOOTER */
+footer { background: var(--black); border-top: 1px solid var(--line); }
+.pole { height: 6px; background: repeating-linear-gradient(-45deg, var(--red) 0 20px, #fff 20px 40px, var(--blue,#1f2a67) 40px 60px, #fff 60px 80px); background-size: 113px 113px; animation: pole 3.4s linear infinite; }
+@keyframes pole { to { background-position: 113px 0; } }
+.foot { padding: 74px clamp(20px,4vw,52px) 34px; }
+.foot__grid { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 44px; }
+.foot__brand { font-family: var(--script); font-size: 34px; }
+.foot__tag { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--red); margin-top: 6px; }
+.foot p { color: var(--mut); font-size: 15px; margin-top: 16px; max-width: 340px; }
+.foot h4 { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; margin-bottom: 16px; }
+.foot a.fl { display: block; color: var(--mut); padding: 5px 0; font-size: 15px; transition: color .4s, transform .4s var(--exp); }
+.foot a.fl:hover { color: #fff; transform: translateX(5px); }
+.foot__bot { max-width: 1280px; margin: 48px auto 0; padding-top: 24px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--mut); }
+
+/* ============================================================ WHATSAPP */
+.wa { position: fixed; right: 22px; bottom: 22px; z-index: 80; width: 60px; height: 60px; border-radius: 50%; background: #25d366; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(37,211,102,.4); transition: transform .5s var(--exp); }
+.wa:hover { transform: scale(1.1); }
+.wa svg { width: 32px; height: 32px; }
+
+/* ============================================================ RESPONSIVE */
+@media (max-width: 1024px) {
+  .why__grid { grid-template-columns: 1fr 1fr; }
+  .why__col:nth-child(2) { border-right: none; padding-right: 0; }
+  .why__col { border-bottom: 1px solid var(--line); }
+  .story__grid { grid-template-columns: 1fr; }
+  .story__img { height: 420px; }
+  .rev__grid { grid-template-columns: 1fr 1fr; }
+  .ov-body { grid-template-columns: 1fr; }
+  .ov-side { display: none; }
+}
+@media (max-width: 680px) {
+  .why__head { grid-template-columns: 1fr; }
+  .why__grid { grid-template-columns: 1fr; }
+  .why__col { border-right: none; padding-right: 0; }
+  .svc__row { grid-template-columns: 34px 1fr auto; }
+  .svc__time { display: none; }
+  .br__grid { grid-template-columns: 1fr; }
+  .rev__grid { grid-template-columns: 1fr; }
+  .story__stats { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
+  .foot__grid { grid-template-columns: 1fr; gap: 30px; }
+  .hero__foot { justify-content: center; text-align: center; }
+  .hero__usp { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<nav id="nav">
+  <a href="#top" class="brand" aria-label="Excellent Barber home">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+    <span class="brand__name">Excellent Barber</span>
+  </a>
+  <button class="menu-btn" id="menuOpen">Menu <span class="menu-btn__ic"><i></i><i></i><i></i><i></i></span></button>
+</nav>
+
+<!-- ================= MENU OVERLAY ================= -->
+<div id="overlay">
+  <div class="ov-top">
+    <span class="brand"><span class="brand__name">Excellent Barber</span></span>
+    <button class="ov-close" id="menuClose">Close ✕</button>
+  </div>
+  <div class="ov-body">
+    <nav class="ov-links">
+      <a href="#why" data-close>Why Us <small>01</small></a>
+      <a href="#story" data-close>Our Story <small>02</small></a>
+      <a href="#services" data-close>Services <small>03</small></a>
+      <a href="#gallery" data-close>Gallery <small>04</small></a>
+      <a href="#reviews" data-close>Reviews <small>05</small></a>
+      <a href="#branches" data-close>Branches <small>06</small></a>
+    </nav>
+    <div class="ov-side">
+      <div><h5>Call The Chair</h5><p><a href="tel:+27725987882" class="inl">Rafik · 072 598 7882</a><br>Walk-ins welcome, seven days a week.</p></div>
+      <div><h5>Sunward Park — Flagship</h5><p>Kingfisher Corner, Sunward Park, Boksburg, 1459</p></div>
+      <div><h5>Woodmead</h5><p>Dunwoody Shopping Centre, Western Service Road, Woodmead, Sandton, 2190</p></div>
+      <div><h5>Follow</h5><p><a href="https://web.facebook.com/p/Excellent-Barber-100064303174164/" target="_blank" rel="noopener" class="inl">Facebook</a> · <a href="https://wa.me/27725987882" target="_blank" rel="noopener" class="inl">WhatsApp</a></p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero__bg"><img class="kb" src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1800&q=85&auto=format&fit=crop" alt="Barber giving a sharp fade at Excellent Barber" /></div>
+  <div class="hero__center" id="heroText">
+    <p class="hero__eye">Est. 2018 · Boksburg <span>&amp;</span> Sandton</p>
+    <h1 class="disp"><span class="ml"><span>Clean Cut.</span></span><span class="ml"><span><span class="red">Close</span> Shave.</span></span></h1>
+  </div>
+  <div class="hero__foot">
+    <div class="hero__usp rise">
+      <b>/</b>
+      <p>More than a haircut. Eight years of master-barber craft — and a hot-towel close shave on every single visit.</p>
+    </div>
+    <div class="hero__cta rise">
+      <a href="#services" class="btn btn--red">View Services <span class="btn__dot"></span></a>
+      <a href="#branches" class="btn btn--out">Find a Branch</a>
+    </div>
+  </div>
+  <div class="hero__scroll">Scroll<i></i></div>
+</header>
+
+<!-- ================= MARQUEE ================= -->
+<div class="mq" aria-hidden="true">
+  <div class="mq__t">
+    <span>Skin Fades <i class="star">✦</i> Hot Towel Shaves <i class="star">✦</i> Beard Sculpts <i class="star">✦</i> Kids Cuts <i class="star">✦</i> <em>Clean Cut · Close Shave</em> <i class="star">✦</i></span>
+    <span>Skin Fades <i class="star">✦</i> Hot Towel Shaves <i class="star">✦</i> Beard Sculpts <i class="star">✦</i> Kids Cuts <i class="star">✦</i> <em>Clean Cut · Close Shave</em> <i class="star">✦</i></span>
+  </div>
+</div>
+
+<!-- ================= WHY / USP ================= -->
+<section class="sec why" id="why">
+  <div class="wrap">
+    <div class="why__head grp">
+      <div class="rise"><span class="eyebrow">Why Excellent</span><h2 class="sec-title" style="margin-top:18px">NOT A CHAIN.<br>A <span style="color:var(--red)">CRAFT.</span></h2></div>
+      <p class="rise">Anyone can run clippers. We built a reputation instead — one master barber's standard, held in every chair, at a price that respects your pocket. Here's what actually sets the shop apart.</p>
+    </div>
+    <div class="why__grid grp">
+      <div class="why__col rise"><span class="why__bar"></span><div class="why__no">01</div><h3>Master-Barber Craft</h3><p>Founded and led by Algerian-born master barber Rafik — trained hands, not a franchise script. Precision fades and classic cuts done properly.</p></div>
+      <div class="why__col rise"><span class="why__bar"></span><div class="why__no">02</div><h3>Hot Towel On Every Cut</h3><p>We finish the way barbers used to: a hot towel and a clean straight-razor line-up on every service. That's the "close shave" in our name.</p></div>
+      <div class="why__col rise"><span class="why__bar"></span><div class="why__no">03</div><h3>4.9★ Consistency</h3><p>Rated 4.9 on Google across both branches. Regulars don't gamble on a good day — they get the same sharp cut, every time.</p></div>
+      <div class="why__col rise"><span class="why__bar"></span><div class="why__no">04</div><h3>Built For The Community</h3><p>Patient chairs for the little gents, a special Wednesday rate for pensioners, and walk-ins welcome seven days a week. Everyone leaves fresh.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STORY ================= -->
+<section class="sec story" id="story">
+  <div class="wrap">
+    <div class="story__grid">
+      <div class="imgwrap story__img rise"><img src="https://images.unsplash.com/photo-1599351431202-1e0f0137899a?w=1200&q=85&auto=format&fit=crop" alt="Rafik at work in the Excellent Barber chair" /></div>
+      <div class="grp">
+        <div class="rise"><span class="eyebrow">Our Story</span></div>
+        <h2 class="rise">Born in Algeria.<br>Perfected in Joburg.</h2>
+        <p class="rise">Excellent Barber is a haven for those who value style, precision and a first-class grooming experience — founded over eight years ago by Algerian-born barber and entrepreneur <strong>Rafik Benrais</strong>.</p>
+        <p class="rise">What started as a single chair grew into two busy branches, anchored by the flagship in Sunward Park, Boksburg. The tools and the trends move on. The promise painted on the door never does — <em>clean cut, close shave, excellent every time.</em></p>
+        <div class="story__stats grp">
+          <div class="story__stat rise"><b data-count="8"><span class="num">0</span><span class="u">+</span></b><span>Years Sharp</span></div>
+          <div class="story__stat rise"><b data-count="4.9" data-dec="1"><span class="num">0</span></b><span>Google Rating</span></div>
+          <div class="story__stat rise"><b data-count="2"><span class="num">0</span></b><span>Branches</span></div>
+          <div class="story__stat rise"><b><span class="u">∞</span></b><span>Hot Towels</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SERVICES ================= -->
+<section class="sec svc" id="services">
+  <div class="wrap">
+    <div class="svc__head grp">
+      <div class="rise"><span class="eyebrow">The Menu</span><h2 class="sec-title" style="margin-top:18px">Take The Chair</h2></div>
+      <p class="rise">Every service finished with a hot towel and a clean line-up. Prices are honest and posted — no surprises at the mirror.</p>
+    </div>
+    <div class="svc__list grp">
+      <div class="svc__row rise"><span class="svc__no">01</span><span class="svc__name">Gents Cut</span><span class="svc__time">Consultation · Wash · Style</span><span class="svc__price">R130</span></div>
+      <div class="svc__row rise"><span class="svc__no">02</span><span class="svc__name">All Types of Fades</span><span class="svc__time">Skin to length · Lined up</span><span class="svc__price">R140</span></div>
+      <div class="svc__row rise"><span class="svc__no">03</span><span class="svc__name">Cut &amp; Beard Trim</span><span class="svc__time">Shaped · Edged · Conditioned</span><span class="svc__price">R170</span></div>
+      <div class="svc__row rise"><span class="svc__no">04</span><span class="svc__name">Cut &amp; Beard Shave</span><span class="svc__time">Hot towel · Straight razor</span><span class="svc__price">R230</span></div>
+      <div class="svc__row rise"><span class="svc__no">05</span><span class="svc__name">Head Shave</span><span class="svc__time">Smooth all-over · Balm</span><span class="svc__price">R130</span></div>
+      <div class="svc__row rise"><span class="svc__no">06</span><span class="svc__name">Beard Trim</span><span class="svc__time">Quick clipper shape-up</span><span class="svc__price">R70</span></div>
+      <div class="svc__row rise"><span class="svc__no">07</span><span class="svc__name">High School Cut</span><span class="svc__time">School-ready · Clean line-up</span><span class="svc__price">R130</span></div>
+      <div class="svc__row rise"><span class="svc__no">08</span><span class="svc__name">Primary &amp; Toddlers</span><span class="svc__time">Patient · Friendly chair</span><span class="svc__price">R110</span></div>
+      <div class="svc__row rise"><span class="svc__no">09</span><span class="svc__name">Pensioner Day · Wed</span><span class="svc__time">Our senior gentlemen</span><span class="svc__price">R90</span></div>
+    </div>
+    <p class="svc__note rise">On the shelf: hair wax &amp; gel, beard growth oil, beard balm &amp; shampoo, after-shave cream and perfumes. <b>Ask in-store or on WhatsApp for pricing.</b></p>
+  </div>
+</section>
+
+<!-- ================= GALLERY ================= -->
+<section class="gal" id="gallery">
+  <div class="gal__head grp">
+    <span class="eyebrow rise">The Work</span>
+    <h2 class="sec-title rise" style="margin-top:14px">Fresh From The Chair</h2>
+  </div>
+  <div class="gal__track">
+    <figure><img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=700&q=85&auto=format&fit=crop" alt="Sharp skin fade" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=85&auto=format&fit=crop" alt="Barber tools on the station" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=700&q=85&auto=format&fit=crop" alt="Beard trim in progress" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=700&q=85&auto=format&fit=crop" alt="Hot towel straight razor shave" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=700&q=85&auto=format&fit=crop" alt="Textured crop finish" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1512690459411-b9245aed614b?w=700&q=85&auto=format&fit=crop" alt="Classic styled cut" /></figure>
+    <!-- duplicate for seamless loop -->
+    <figure><img src="https://images.unsplash.com/photo-1621607512214-68297480165e?w=700&q=85&auto=format&fit=crop" alt="" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=700&q=85&auto=format&fit=crop" alt="" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?w=700&q=85&auto=format&fit=crop" alt="" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1596728325488-58c87691e9af?w=700&q=85&auto=format&fit=crop" alt="" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1605497788044-5a32c7078486?w=700&q=85&auto=format&fit=crop" alt="" /></figure>
+    <figure><img src="https://images.unsplash.com/photo-1512690459411-b9245aed614b?w=700&q=85&auto=format&fit=crop" alt="" /></figure>
+  </div>
+</section>
+
+<!-- ================= REVIEWS ================= -->
+<section class="sec rev" id="reviews">
+  <div class="wrap">
+    <div class="rev__head grp">
+      <span class="eyebrow eyebrow--c rise" style="justify-content:center">The Community</span>
+      <h2 class="sec-title rise" style="margin-top:14px">Rated <span style="color:var(--red)">4.9</span> On Google</h2>
+      <div class="rev__stars rise">★★★★★</div>
+    </div>
+    <div class="rev__grid grp">
+      <div class="rev__card rise"><p class="rev__q">Best barber in Sunward, staff is nice, they do a really good job — my favourite barber is Rezki.</p><div class="rev__n">Ash Bashir</div><div class="rev__r">Local Guide · Google</div></div>
+      <div class="rev__card rise"><p class="rev__q">All in the name — 100% the best barber in Boksburg.</p><div class="rev__n">Dolf Stroebel</div><div class="rev__r">Local Guide · Google</div></div>
+      <div class="rev__card rise"><p class="rev__q">Great haircut, great barbers, great company. Highly recommended.</p><div class="rev__n">Nathan Coetzee</div><div class="rev__r">Google Review</div></div>
+      <div class="rev__card rise"><p class="rev__q">Grew my hair for over 4 years… an outstanding cut. Feels so much fresher and looks better than expected.</p><div class="rev__n">Craig Spindler</div><div class="rev__r">Local Guide · Google</div></div>
+      <div class="rev__card rise"><p class="rev__q">Best barber in town, people always friendly, nice place.</p><div class="rev__n">Thomas Kruger</div><div class="rev__r">Local Guide · Google</div></div>
+      <div class="rev__card rise"><p class="rev__q">Very friendly service and staff. Good value for money.</p><div class="rev__n">Jason Hodgkiss</div><div class="rev__r">Local Guide · Google</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BRANCHES ================= -->
+<section class="sec br" id="branches">
+  <div class="wrap">
+    <div class="grp">
+      <span class="eyebrow rise">Find Us</span>
+      <h2 class="sec-title rise" style="margin-top:14px">Two Chairs. One Standard.</h2>
+    </div>
+    <div class="br__grid grp">
+      <!-- Flagship -->
+      <div class="br__card rise">
+        <div class="br__img imgwrap"><img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?w=1000&q=85&auto=format&fit=crop" alt="Excellent Barber Sunward Park interior" /></div>
+        <div class="br__body">
+          <div class="br__tag">Flagship · Boksburg</div>
+          <div class="br__name">Sunward Park</div>
+          <p class="br__addr">Kingfisher Corner, Sunward Park, Boksburg, 1459</p>
+          <div class="br__meta">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Rafik · 072 598 7882</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Mon–Fri 08:00–18:00 · Sat 08:00–16:00 · Sun 08:00–15:00</div>
+          </div>
+          <div class="br__act">
+            <a href="https://www.google.com/maps/search/?api=1&query=Kingfisher+Corner+Sunward+Park+Boksburg" target="_blank" rel="noopener" class="btn btn--out">Directions</a>
+            <a href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%20(Sunward%20Park)%2C%20I'd%20like%20to%20pop%20in%20for%20a%20cut." target="_blank" rel="noopener" class="btn btn--red">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      <!-- Woodmead -->
+      <div class="br__card rise">
+        <div class="br__img imgwrap"><img src="https://images.unsplash.com/photo-1585747860715-2ba37e788b70?w=1000&q=85&auto=format&fit=crop" alt="Excellent Barber Woodmead interior" /></div>
+        <div class="br__body">
+          <div class="br__tag">Branch 02 · Sandton</div>
+          <div class="br__name">Woodmead</div>
+          <p class="br__addr">Dunwoody Shopping Centre, Western Service Road, Woodmead, Sandton, 2190</p>
+          <div class="br__meta">
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Rafik · 072 598 7882</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Mon–Fri 08:00–18:00 · Sat 08:00–16:00 · Sun 08:00–15:00</div>
+          </div>
+          <div class="br__act">
+            <a href="https://www.google.com/maps/search/?api=1&query=Dunwoody+Shopping+Centre+Western+Service+Road+Woodmead+Sandton" target="_blank" rel="noopener" class="btn btn--out">Directions</a>
+            <a href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%20(Woodmead)%2C%20I'd%20like%20to%20pop%20in%20for%20a%20cut." target="_blank" rel="noopener" class="btn btn--red">WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="sec cta">
+  <div class="wrap grp">
+    <h2 class="rise">Chair's Open.<br>Come Through.</h2>
+    <p class="rise">No app, no fuss. Walk in, or give Rafik a call and we'll sort you out.</p>
+    <a href="tel:+27725987882" class="cta__phone rise">072 598 7882</a>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="pole"></div>
+  <div class="foot">
+    <div class="foot__grid">
+      <div>
+        <div class="foot__brand">Excellent Barber</div>
+        <div class="foot__tag">Clean Cut · Close Shave</div>
+        <p>Eight years of master-barber craft in Johannesburg. Two branches, one standard — and a hot-towel finish on every cut. Walk-ins always welcome.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <a class="fl" href="#why">Why Us</a>
+        <a class="fl" href="#story">Our Story</a>
+        <a class="fl" href="#services">Services</a>
+        <a class="fl" href="#reviews">Reviews</a>
+        <a class="fl" href="#branches">Branches</a>
+      </div>
+      <div>
+        <h4>Get In Touch</h4>
+        <a class="fl" href="tel:+27725987882">072 598 7882</a>
+        <a class="fl" href="https://wa.me/27725987882" target="_blank" rel="noopener">WhatsApp Us</a>
+        <a class="fl" href="https://web.facebook.com/p/Excellent-Barber-100064303174164/" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="foot__bot">
+      <span>© 2026 Excellent Barber. All rights reserved.</span>
+      <span>Sunward Park · Woodmead — Made in South Africa</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= WHATSAPP ================= -->
+<a class="wa" href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%2C%20I'd%20like%20to%20pop%20in%20for%20a%20cut." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" fill="#fff" aria-hidden="true"><path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.4 2 7.7L.5 31.5l8-2c2.2 1.2 4.8 1.9 7.5 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5C3.6 20.3 3 18.2 3 16 3 8.8 8.8 3 16 3s13 5.8 13 13-5.8 12.5-13 12.5zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.2 2.6 4 6.3 5.6.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+</a>
+
+<script>
+/* ---------- hero intro on load ---------- */
+function heroIn(){
+  document.getElementById('heroText').classList.add('load');
+  document.querySelectorAll('.hero__foot .rise').forEach((el,i) => { el.style.transitionDelay = (0.5 + i*0.12) + 's'; el.classList.add('in'); });
+}
+if (document.readyState === 'complete') requestAnimationFrame(heroIn);
+else window.addEventListener('load', () => requestAnimationFrame(heroIn));
+
+/* ---------- reveal on scroll (rise, grp, imgwrap, .in for headings) ---------- */
+const io = new IntersectionObserver((es) => {
+  es.forEach(e => {
+    if (!e.isIntersecting) return;
+    e.target.classList.add('in');
+    e.target.querySelectorAll && e.target.querySelectorAll('[data-count]').forEach(countUp);
+    io.unobserve(e.target);
+  });
+}, { threshold: 0.16, rootMargin: '0px 0px -8% 0px' });
+document.querySelectorAll('.rise, .grp, .imgwrap, h2, .why__head, .story__stats').forEach(el => io.observe(el));
+
+/* ---------- count-up ---------- */
+function countUp(el){
+  if (el.dataset.done) return; el.dataset.done = '1';
+  const num = el.querySelector('.num'); if(!num) return;
+  const target = parseFloat(el.dataset.count), dec = parseInt(el.dataset.dec||'0',10);
+  const t0 = performance.now(), dur = 1500;
+  (function s(now){
+    const p = Math.min((now-t0)/dur,1), e = 1-Math.pow(1-p,3);
+    num.textContent = (target*e).toFixed(dec);
+    if(p<1) requestAnimationFrame(s);
+  })(t0);
+}
+
+/* ---------- nav scrolled state ---------- */
+const nav = document.getElementById('nav');
+addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), { passive:true });
+
+/* ---------- fullscreen menu ---------- */
+const ov = document.getElementById('overlay');
+document.getElementById('menuOpen').addEventListener('click', () => { ov.classList.add('open'); document.body.style.overflow='hidden'; });
+function closeMenu(){ ov.classList.remove('open'); document.body.style.overflow=''; }
+document.getElementById('menuClose').addEventListener('click', closeMenu);
+ov.querySelectorAll('[data-close]').forEach(a => a.addEventListener('click', closeMenu));
+addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); });
+
+/* ---------- subtle parallax on story image ---------- */
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const p = document.querySelector('.story__img img');
+  if (p) addEventListener('scroll', () => {
+    const r = p.getBoundingClientRect(), vh = innerHeight;
+    if (r.bottom < 0 || r.top > vh) return;
+    const prog = (r.top + r.height/2 - vh/2) / vh;
+    p.style.transform = `translateY(${(-prog*22).toFixed(1)}px) scale(1.08)`;
+  }, { passive:true });
+}
+</script>
+</body>
+</html>
