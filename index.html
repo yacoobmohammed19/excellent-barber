@@ -275,7 +275,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .gal__head { padding: 0 clamp(20px,4vw,52px); margin-bottom: 48px; }
 .gal__track { display: flex; gap: 18px; width: max-content; animation: gscroll 48s linear infinite; padding: 0 9px; }
 .gal:hover .gal__track { animation-play-state: paused; }
-.gal__track figure { width: clamp(240px,26vw,360px); aspect-ratio: 4/5; overflow: hidden; flex: 0 0 auto; }
+.gal__track figure { width: 320px; height: 400px; aspect-ratio: 4/5; overflow: hidden; flex: 0 0 auto; }
 .gal__track img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(.25); transition: filter .6s var(--exp), transform 1.2s var(--exp); }
 .gal__track figure:hover img { filter: grayscale(0); transform: scale(1.06); }
 @keyframes gscroll { to { transform: translateX(-50%); } }
@@ -337,6 +337,9 @@ footer { background: var(--black); border-top: 1px solid var(--line); }
 .wa:hover { transform: scale(1.1); }
 .wa svg { width: 32px; height: 32px; }
 
+/* ============================================================ MOBILE APP BAR */
+.appbar { display: none; }
+
 /* ============================================================ RESPONSIVE */
 @media (max-width: 1024px) {
   .why__grid { grid-template-columns: 1fr 1fr; }
@@ -354,12 +357,46 @@ footer { background: var(--black); border-top: 1px solid var(--line); }
   .why__col { border-right: none; padding-right: 0; }
   .svc__row { grid-template-columns: 34px 1fr auto; }
   .svc__time { display: none; }
+  /* mobile: swipeable strip instead of auto-marquee (never freezes on touch) */
+  .gal__track { animation: none; width: auto; gap: 14px; padding: 0 20px 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+  .gal__track::-webkit-scrollbar { display: none; }
+  .gal__track { scrollbar-width: none; }
+  .gal__track figure { width: 74vw; height: 92.5vw; scroll-snap-align: center; }
   .br__grid { grid-template-columns: 1fr; }
   .rev__grid { grid-template-columns: 1fr; }
   .story__stats { grid-template-columns: 1fr 1fr; gap: 30px 20px; }
   .foot__grid { grid-template-columns: 1fr; gap: 30px; }
   .hero__foot { justify-content: center; text-align: center; }
   .hero__usp { text-align: left; }
+  /* app-like touches */
+  .hero { min-height: 100dvh; }
+  .hero__cta { width: 100%; }
+  .hero__cta .btn { flex: 1; justify-content: center; }
+  .svc__row:active { padding-left: 24px; padding-right: 24px; }
+  .svc__row:active::before { transform: translateY(0); }
+  .br__card:active { border-color: rgba(255,255,255,.35); }
+  /* hide floating bubble — replaced by bottom app bar */
+  .wa { display: none; }
+  /* leave room for the fixed bottom bar */
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+  .appbar {
+    display: grid; grid-template-columns: repeat(3,1fr);
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 85;
+    background: rgba(11,11,13,.86); backdrop-filter: blur(16px);
+    border-top: 1px solid var(--line);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .appbar a {
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+    padding: 11px 6px 12px; font-size: 10px; font-weight: 600; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--mut);
+    border-right: 1px solid var(--line); transition: color .3s, background .3s;
+  }
+  .appbar a:last-child { border-right: none; }
+  .appbar a:active { background: rgba(255,255,255,.06); color: #fff; }
+  .appbar a svg { width: 21px; height: 21px; }
+  .appbar .ab-wa { color: #25d366; }
+  .appbar .ab-wa svg { fill: #25d366; }
 }
 </style>
 </head>
@@ -617,6 +654,22 @@ footer { background: var(--black); border-top: 1px solid var(--line); }
     </div>
   </div>
 </footer>
+
+<!-- ================= MOBILE APP BAR ================= -->
+<nav class="appbar" aria-label="Quick actions">
+  <a href="tel:+27725987882" aria-label="Call Excellent Barber">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+    Call
+  </a>
+  <a href="#branches" aria-label="Find a branch">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+    Find Us
+  </a>
+  <a class="ab-wa" href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%2C%20I'd%20like%20to%20pop%20in%20for%20a%20cut." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 .5C7.4.5.5 7.4.5 16c0 2.8.7 5.4 2 7.7L.5 31.5l8-2c2.2 1.2 4.8 1.9 7.5 1.9 8.6 0 15.5-6.9 15.5-15.5S24.6.5 16 .5zm0 28c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.3-4.6-.3-.5C3.6 20.3 3 18.2 3 16 3 8.8 8.8 3 16 3s13 5.8 13 13-5.8 12.5-13 12.5zm7.1-9.4c-.4-.2-2.3-1.1-2.6-1.3-.4-.1-.6-.2-.9.2s-1 1.3-1.2 1.5c-.2.2-.4.3-.8.1-.4-.2-1.6-.6-3.1-1.9-1.1-1-1.9-2.2-2.1-2.6-.2-.4 0-.6.2-.8.2-.2.4-.4.5-.7.2-.2.2-.4.4-.7.1-.3 0-.5 0-.7-.1-.2-.9-2.1-1.2-2.9-.3-.8-.6-.7-.9-.7h-.8c-.2 0-.6.1-1 .5-.3.4-1.3 1.3-1.3 3.1s1.3 3.6 1.5 3.9c.2.2 2.6 4 6.3 5.6.9.4 1.6.6 2.1.8.9.3 1.7.2 2.3.1.7-.1 2.3-.9 2.6-1.8.3-.9.3-1.6.2-1.8-.1-.1-.3-.2-.7-.4z"/></svg>
+    WhatsApp
+  </a>
+</nav>
 
 <!-- ================= WHATSAPP ================= -->
 <a class="wa" href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%2C%20I'd%20like%20to%20pop%20in%20for%20a%20cut." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
