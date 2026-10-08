@@ -286,6 +286,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .kit__title { font-family: var(--disp); text-transform: uppercase; font-size: clamp(28px,3.4vw,46px); line-height: 1; margin-bottom: 8px; }
 .kit__sub { color: var(--mut-d); font-size: 15px; margin-bottom: 30px; }
 .kit__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+.kit__grid--2 { grid-template-columns: repeat(2,1fr); max-width: 820px; margin-inline: auto; }
 .kit__card { background: var(--black); color: var(--white); display: flex; flex-direction: column; transition: transform .5s var(--exp); }
 .kit__card:hover { transform: translateY(-6px); }
 .kit__img { position: relative; aspect-ratio: 4/3; background: radial-gradient(circle at 50% 45%, #2a2a31 0%, #121216 70%); display: grid; place-items: center; overflow: hidden; }
@@ -572,34 +573,25 @@ footer { background: var(--black); border-top: 1px solid var(--line); }
     </div>
     <div class="grp">
       <h3 class="kit__title rise">Starter Tools &amp; Machines</h3>
-      <p class="kit__sub rise">Professional clippers available now. Collect at our Woodmead branch. To order or enquire, WhatsApp or call 084 731 4960.</p>
+      <p class="kit__sub rise">Two options: the full 4-piece starter kit, or the pro clipper on its own. Collect at our Woodmead branch. To order or enquire, WhatsApp or call 084 731 4960.</p>
     </div>
-    <div class="kit__grid grp">
+    <div class="kit__grid kit__grid--2 grp">
       <div class="kit__card rise">
-        <div class="kit__img"><svg viewBox="0 0 64 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="22" width="36" height="92" rx="16"/><path d="M10 6h44v16H10z"/><path d="M16 6V1M24 6V1M32 6V1M40 6V1M48 6V1"/><circle cx="32" cy="50" r="6"/><path d="M26 80h12M26 88h12M26 96h12"/></svg><img src="images/kit/machine-1.jpg" loading="lazy" alt="GTS professional five-speed cordless hair clipper (green)" onerror="this.remove()" /></div>
+        <div class="kit__img"><svg viewBox="0 0 64 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="22" width="36" height="92" rx="16"/><path d="M10 6h44v16H10z"/><path d="M16 6V1M24 6V1M32 6V1M40 6V1M48 6V1"/><circle cx="32" cy="50" r="6"/><path d="M26 80h12M26 88h12M26 96h12"/></svg><img src="images/kit/machine-3.jpg" loading="lazy" alt="GTS 4-piece barber starter kit: cordless clipper, T-blade trimmer, foil shaver and nose trimmer" onerror="this.remove()" /></div>
         <div class="kit__body">
-          <span class="kit__tag">Starter Clipper</span>
-          <span class="kit__name">GTS 5-Speed Clipper</span>
-          <span class="kit__price">R750</span>
-          <a href="https://wa.me/27847314960?text=Hi%20Excellent%20Barber%2C%20I%27d%20like%20to%20buy%20the%20GTS%205-Speed%20Clipper%20(R750)." target="_blank" rel="noopener" class="btn btn--red" data-track="Coaching: Order GTS 5-Speed Clipper R750">Order on WhatsApp <span class="btn__dot"></span></a>
+          <span class="kit__tag">Starter Kit</span>
+          <span class="kit__name">GTS 4-Piece Starter Kit</span>
+          <span class="kit__price">R1&nbsp;400</span>
+          <a href="https://wa.me/27847314960?text=Hi%20Excellent%20Barber%2C%20I%27d%20like%20to%20buy%20the%20GTS%204-Piece%20Starter%20Kit%20(R1400)." target="_blank" rel="noopener" class="btn btn--red" data-track="Coaching: Order GTS 4-Piece Starter Kit R1400">Order on WhatsApp <span class="btn__dot"></span></a>
         </div>
       </div>
       <div class="kit__card rise">
         <div class="kit__img"><svg viewBox="0 0 64 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="22" width="36" height="92" rx="16"/><path d="M10 6h44v16H10z"/><path d="M16 6V1M24 6V1M32 6V1M40 6V1M48 6V1"/><circle cx="32" cy="50" r="6"/><path d="M26 80h12M26 88h12M26 96h12"/></svg><img src="images/kit/machine-2.jpg" loading="lazy" alt="GTS professional cordless hair clipper" onerror="this.remove()" /></div>
         <div class="kit__body">
-          <span class="kit__tag">Cordless Clipper</span>
+          <span class="kit__tag">Clipper Only</span>
           <span class="kit__name">GTS Pro Clipper</span>
           <span class="kit__price">R780</span>
           <a href="https://wa.me/27847314960?text=Hi%20Excellent%20Barber%2C%20I%27d%20like%20to%20buy%20the%20GTS%20Pro%20Clipper%20(R780)." target="_blank" rel="noopener" class="btn btn--red" data-track="Coaching: Order GTS Pro Clipper R780">Order on WhatsApp <span class="btn__dot"></span></a>
-        </div>
-      </div>
-      <div class="kit__card rise">
-        <div class="kit__img"><svg viewBox="0 0 64 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="22" width="36" height="92" rx="16"/><path d="M10 6h44v16H10z"/><path d="M16 6V1M24 6V1M32 6V1M40 6V1M48 6V1"/><circle cx="32" cy="50" r="6"/><path d="M26 80h12M26 88h12M26 96h12"/></svg><img src="images/kit/machine-3.jpg" loading="lazy" alt="GTS 4-piece barber kit: cordless clipper, T-blade trimmer, foil shaver and nose trimmer" onerror="this.remove()" /></div>
-        <div class="kit__body">
-          <span class="kit__tag">Full Barber Kit</span>
-          <span class="kit__name">GTS 4-Piece Kit</span>
-          <span class="kit__price">R1&nbsp;400</span>
-          <a href="https://wa.me/27847314960?text=Hi%20Excellent%20Barber%2C%20I%27d%20like%20to%20buy%20the%20GTS%204-Piece%20Kit%20(R1400)." target="_blank" rel="noopener" class="btn btn--red" data-track="Coaching: Order GTS 4-Piece Kit R1400">Order on WhatsApp <span class="btn__dot"></span></a>
         </div>
       </div>
     </div>
