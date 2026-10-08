@@ -270,6 +270,41 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .svc__note { margin-top: 26px; color: var(--mut); font-size: 14px; }
 .svc__note b { color: var(--red); }
 
+/* ============================================================ COACHING */
+.coach { background: var(--cream); color: var(--ink); }
+.coach .eyebrow { color: var(--red); }
+.coach__head { display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: end; margin-bottom: 56px; }
+.coach__head h2 { color: var(--ink); margin-top: 18px; }
+.coach__head h2 .red { color: var(--red); }
+.coach__head p { color: var(--mut-d); font-size: 17px; line-height: 1.7; max-width: 480px; }
+.coach__pts { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--line-d); margin-bottom: 72px; }
+.coach__pt { padding: 34px 28px 34px 0; border-right: 1px solid var(--line-d); }
+.coach__pt:last-child { border-right: none; }
+.coach__pt b { font-family: var(--disp); font-size: 15px; color: var(--red); letter-spacing: .1em; }
+.coach__pt h3 { font-family: var(--disp); text-transform: uppercase; font-size: clamp(22px,2.2vw,30px); line-height: 1; margin: 18px 0 12px; }
+.coach__pt p { color: var(--mut-d); font-size: 15px; }
+.kit__title { font-family: var(--disp); text-transform: uppercase; font-size: clamp(28px,3.4vw,46px); line-height: 1; margin-bottom: 8px; }
+.kit__sub { color: var(--mut-d); font-size: 15px; margin-bottom: 30px; }
+.kit__grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 22px; }
+.kit__card { background: var(--black); color: var(--white); display: flex; flex-direction: column; transition: transform .5s var(--exp); }
+.kit__card:hover { transform: translateY(-6px); }
+.kit__img { position: relative; aspect-ratio: 4/3; background: radial-gradient(circle at 50% 45%, #2a2a31 0%, #121216 70%); display: grid; place-items: center; overflow: hidden; }
+.kit__img svg { height: 62%; width: auto; color: rgba(255,255,255,.7); }
+.kit__img img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #fff; }
+.kit__body { padding: 26px 26px 28px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.kit__tag { font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--red); font-weight: 600; }
+.kit__name { font-family: var(--disp); text-transform: uppercase; font-size: 28px; line-height: 1; }
+.kit__price { font-family: var(--disp); font-size: 40px; line-height: 1; margin: 6px 0 14px; }
+.kit__card .btn { margin-top: auto; padding: 13px 22px; font-size: 11px; align-self: flex-start; }
+.coach__cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 48px; }
+.coach__cta small { color: var(--mut-d); font-size: 14px; }
+@media (max-width: 1024px) { .coach__head { grid-template-columns: 1fr; } .kit__grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 680px) {
+  .coach__pts { grid-template-columns: 1fr; }
+  .coach__pt { border-right: none; border-bottom: 1px solid var(--line-d); padding-right: 0; }
+  .kit__grid { grid-template-columns: 1fr; }
+}
+
 /* ============================================================ GALLERY */
 .gal { background: var(--black); padding: clamp(70px,9vw,120px) 0; overflow: hidden; }
 .gal__head { padding: 0 clamp(20px,4vw,52px); margin-bottom: 48px; }
@@ -425,6 +460,7 @@ footer { background: var(--black); border-top: 1px solid var(--line); }
       <a href="#gallery" data-close>Gallery <small>04</small></a>
       <a href="#reviews" data-close>Reviews <small>05</small></a>
       <a href="#branches" data-close>Branches <small>06</small></a>
+      <a href="#coaching" data-close>Coaching <small>07</small></a>
     </nav>
     <div class="ov-side">
       <div><h5>Call The Chair</h5><p><a href="tel:+27725987882" class="inl">Rafik · 072 598 7882</a><br>Walk-ins welcome, seven days a week.</p></div>
@@ -519,6 +555,59 @@ footer { background: var(--black); border-top: 1px solid var(--line); }
       <div class="svc__row rise"><span class="svc__no">09</span><span class="svc__name">Pensioner Day · Wed</span><span class="svc__time">Our senior gentlemen</span><span class="svc__price">R90</span></div>
     </div>
     <p class="svc__note rise">On the shelf: hair wax &amp; gel, beard growth oil, beard balm &amp; shampoo, after-shave cream and perfumes. <b>Ask in-store or on WhatsApp for pricing.</b></p>
+  </div>
+</section>
+
+<!-- ================= BARBER COACHING ================= -->
+<section class="sec coach" id="coaching">
+  <div class="wrap">
+    <div class="coach__head grp">
+      <div class="rise"><span class="eyebrow">Barber Coaching</span><h2 class="sec-title">Start Your Own <span class="red">Barber Business</span></h2></div>
+      <p class="rise">Come join us to start your own barber business. Learn the craft from our master barbers, get the right tools, and go from the chair to owning your own shop.</p>
+    </div>
+    <div class="coach__pts grp">
+      <div class="coach__pt rise"><b>01</b><h3>Learn The Craft</h3><p>Hands-on coaching in our shop: cuts, fades, beard work and the hot-towel finish.</p></div>
+      <div class="coach__pt rise"><b>02</b><h3>Chair To Owner</h3><p>Guidance on starting out: finding clients, pricing and running your own chair or shop.</p></div>
+      <div class="coach__pt rise"><b>03</b><h3>Starter Tools</h3><p>Professional machines we trust and use, available to buy so you start with the right kit.</p></div>
+    </div>
+    <div class="grp">
+      <h3 class="kit__title rise">Starter Tools &amp; Machines</h3>
+      <p class="kit__sub rise">Professional clippers available now. Collect at our Woodmead branch or WhatsApp us on 072 598 7882.</p>
+    </div>
+    <div class="kit__grid grp">
+      <div class="kit__card rise">
+        <div class="kit__img"><svg viewBox="0 0 64 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="22" width="36" height="92" rx="16"/><path d="M10 6h44v16H10z"/><path d="M16 6V1M24 6V1M32 6V1M40 6V1M48 6V1"/><circle cx="32" cy="50" r="6"/><path d="M26 80h12M26 88h12M26 96h12"/></svg><img src="images/kit/machine-1.jpg" loading="lazy" alt="Starter Machine — professional barber clipper" onerror="this.remove()" /></div>
+        <div class="kit__body">
+          <span class="kit__tag">Starter Tool</span>
+          <span class="kit__name">Starter Machine</span>
+          <span class="kit__price">R750</span>
+          <a href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%2C%20I%27d%20like%20to%20buy%20the%20Starter%20Machine%20(R750)." target="_blank" rel="noopener" class="btn btn--red" data-track="Coaching: Order Starter Machine R750">Order on WhatsApp <span class="btn__dot"></span></a>
+        </div>
+      </div>
+      <div class="kit__card rise">
+        <div class="kit__img"><svg viewBox="0 0 64 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="22" width="36" height="92" rx="16"/><path d="M10 6h44v16H10z"/><path d="M16 6V1M24 6V1M32 6V1M40 6V1M48 6V1"/><circle cx="32" cy="50" r="6"/><path d="M26 80h12M26 88h12M26 96h12"/></svg><img src="images/kit/machine-2.jpg" loading="lazy" alt="Pro Machine — professional barber clipper" onerror="this.remove()" /></div>
+        <div class="kit__body">
+          <span class="kit__tag">Starter Tool</span>
+          <span class="kit__name">Pro Machine</span>
+          <span class="kit__price">R780</span>
+          <a href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%2C%20I%27d%20like%20to%20buy%20the%20Pro%20Machine%20(R780)." target="_blank" rel="noopener" class="btn btn--red" data-track="Coaching: Order Pro Machine R780">Order on WhatsApp <span class="btn__dot"></span></a>
+        </div>
+      </div>
+      <div class="kit__card rise">
+        <div class="kit__img"><svg viewBox="0 0 64 120" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="22" width="36" height="92" rx="16"/><path d="M10 6h44v16H10z"/><path d="M16 6V1M24 6V1M32 6V1M40 6V1M48 6V1"/><circle cx="32" cy="50" r="6"/><path d="M26 80h12M26 88h12M26 96h12"/></svg><img src="images/kit/machine-3.jpg" loading="lazy" alt="Premium Machine — professional barber clipper" onerror="this.remove()" /></div>
+        <div class="kit__body">
+          <span class="kit__tag">Starter Tool</span>
+          <span class="kit__name">Premium Machine</span>
+          <span class="kit__price">R1&nbsp;400</span>
+          <a href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%2C%20I%27d%20like%20to%20buy%20the%20Premium%20Machine%20(R1400)." target="_blank" rel="noopener" class="btn btn--red" data-track="Coaching: Order Premium Machine R1400">Order on WhatsApp <span class="btn__dot"></span></a>
+        </div>
+      </div>
+    </div>
+    <div class="coach__cta grp">
+      <a href="https://wa.me/27725987882?text=Hi%20Excellent%20Barber%2C%20I%27m%20interested%20in%20becoming%20a%20barber.%20Please%20tell%20me%20about%20Barber%20Coaching." target="_blank" rel="noopener" class="btn btn--red rise" data-track="Coaching: I'm Interested">I'm Interested — WhatsApp Us <span class="btn__dot"></span></a>
+      <a href="tel:+27725987882" class="btn btn--dark rise" data-track="Coaching: Call Rafik">Call Rafik</a>
+      <small class="rise">Interested in becoming a barber? Contact us and we'll talk you through it.</small>
+    </div>
   </div>
 </section>
 
@@ -640,6 +729,7 @@ footer { background: var(--black); border-top: 1px solid var(--line); }
         <a class="fl" href="#services">Services</a>
         <a class="fl" href="#reviews">Reviews</a>
         <a class="fl" href="#branches">Branches</a>
+        <a class="fl" href="#coaching">Barber Coaching</a>
       </div>
       <div>
         <h4>Get In Touch</h4>
